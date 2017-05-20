@@ -43,7 +43,7 @@ class UsersController extends Controller
 		]);
 		
 		Log::info('Store user ' . $user->id);
-		
+
 //		broadcast(new NewUser($user))->toOthers();
 		event(new NewUser($user));
 		

@@ -19,8 +19,6 @@ class User extends Authenticatable
 		'email.required' => '',
 	];
 	
-	use Notifiable;
-	
 	/**
 	 * The attributes that are mass assignable.
 	 *
@@ -39,13 +37,40 @@ class User extends Authenticatable
 		'password', 'remember_token',
 	];
 	
-	public function roles()
-	{
-		return $this->belongsToMany(Role::class);
-	}
-	
 	public function messages()
 	{
 		return $this->hasMany(Message::class);
+	}
+	
+	public function chatMessages()
+	{
+		return $this->hasMany(ChatMessage::class);
+	}
+	
+	public function hasAnyRole($roles): bool
+	{
+		if (is_array($roles)) :
+			foreach ($roles as $role) :
+				if ($this->hasRole($role)) :
+					return true;
+				endif;
+			endforeach;
+		endif;
+		
+		return false;
+	}
+	
+	public function hasRole($role): bool
+	{
+		if ($this->roles()->where('name', $role)->first()) :
+			return true;
+		endif;
+		
+		return false;
+	}
+	
+	public function roles()
+	{
+		return $this->belongsToMany(Role::class);
 	}
 }

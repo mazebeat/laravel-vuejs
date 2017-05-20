@@ -5,21 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Message extends Model
+class ChatMessage extends Model
 {
 	// Import Notifiable Trait
 	use Notifiable;
 	
-	protected $guarded = ['id'];
-	protected $fillable = ['message', 'user_id', 'to_user_id'];
+	protected $fillable = ['message'];
 	
 	public function user()
 	{
 		return $this->belongsTo(User::class);
 	}
 	
-	public function routeNotificationForSlack()
-	{
-		return env('SLACK_WEBHOOK_URL');
-	}
 }

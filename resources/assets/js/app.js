@@ -12,7 +12,7 @@ require('./bootstrap');
  */
 Vue.component('user-detail', require('./components/User.vue'));
 Vue.component('users-list', require('./components/Users.vue'));
-Vue.component('chat-message', require('./components/ChatMessage.vue'));
+Vue.component('chat-message', require('./components/chatmessage.vue'));
 Vue.component('chat-log', require('./components/ChatLog.vue'));
 Vue.component('chat-composer', require('./components/ChatComposer.vue'));
 
@@ -24,17 +24,14 @@ const app = new Vue({
 	},
 	methods: {
 		addMessage(message) {
-			// Add to existing messages
 			this.messages.push(message);
-
-			// Persist to the database etc
-			axios.post('/messages', message).then(response => {
-				// Do whatever;
+			axios.post('/chat/messages', message).then(response => {
+				// Check if message were save correctly;
 			})
 		}
 	},
-	created: () => {
-		axios.get('/messages').then(response => {
+	created() {
+		axios.get('/chat/messages').then(response => {
 			this.messages = response.data;
 		});
 
@@ -48,9 +45,7 @@ const app = new Vue({
 			.leaving((user) => {
 				this.usersInRoom = this.usersInRoom.filter(u => u != user)
 			})
-			.listen('MessagePosted', (e) => {
-				console.log('listen', e);
-
+			.listen('ChatMessagePosted', (e) => {
 				this.messages.push({
 					message: e.message.message,
 					user   : e.user

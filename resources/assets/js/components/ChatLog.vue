@@ -9,17 +9,17 @@
 
 <script>
 	export default {
-	    props: ['messages']
+		props: ['messages']
 	}
 </script>
 
 <style lang="css">
 	.chat-log .chat-message:nth-child(even) {
-	    background-color: #ccc;
+		background-color : #cccccc;
 	}
 	
 	.empty {
-	    padding: 1rem;
-	    text-align: center;
+		padding    : 1rem;
+		text-align : center;
 	}
 </style>

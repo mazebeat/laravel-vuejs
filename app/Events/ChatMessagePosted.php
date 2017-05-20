@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Message;
+use App\ChatMessage;
 use App\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -11,12 +11,12 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessagePosted implements ShouldBroadcast
+class ChatMessagePosted implements ShouldBroadcast
 {
 	use Dispatchable, InteractsWithSockets, SerializesModels;
 	
 	/**
-	 * Message
+	 * ChatMessage
 	 *
 	 * @var Message
 	 */
@@ -34,7 +34,7 @@ class MessagePosted implements ShouldBroadcast
 	 *
 	 * @return void
 	 */
-	public function __construct(Message $message, User $user)
+	public function __construct(ChatMessage $message, User $user)
 	{
 		$this->message = $message;
 		$this->user    = $user;

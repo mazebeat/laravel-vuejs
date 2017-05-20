@@ -10,8 +10,8 @@ class Admin extends Authenticatable
 	use Notifiable;
 	
 	public static $rules = [
-		'name'      => 'required',
-		'email'     => 'required|email',
+		'name'  => 'required',
+		'email' => 'required|email',
 	];
 	
 	public static $messages = [

@@ -25,41 +25,15 @@ Route::prefix('admin')->group(function () {
 	Route::get('/', 'AdminController@index')->name('admin.dashboard');
 });
 
-//
-
 Route::get('vue', function () {
 	return View::make('vue');
 })->name('vue');
 
-Route::resource('users', 'UsersController');
-
-Route::get('test', function () {
-	dd(\Illuminate\Support\Facades\Config::get('broadcasting'));
-	dd(App\User::all());
+Route::prefix('chat')->group(function () {
+	Route::get('/', 'ChatsController@index');
+	Route::get('messages', 'ChatsController@show');
+	Route::post('messages', 'ChatsController@store');
 });
 
-//
-
-Route::get('/chat', function () {
-	return view('chat');
-})->middleware('auth');
-
-Route::get('/messages', function () {
-	return App\Message::with('user')->get();
-})->middleware('auth');
-
-Route::post('/messages', function () {
-	// Store the new message
-	$user = Auth::user();
-	
-	$message = $user->messages()->create([
-		'message' => request()->get('message')
-	]);
-	
-	// Announce that a new message has been posted
-	broadcast(new App\Events\MessagePosted($message, $user))->toOthers();
-
-//	event(new App\Events\MessagePosted($message, $user));
-	
-	return ['status' => 'OK'];
-})->middleware('auth');
+Route::resource('users', 'UsersController');
+Route::resource('messages', 'MessagesController');

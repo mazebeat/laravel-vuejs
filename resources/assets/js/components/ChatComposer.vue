@@ -7,36 +7,36 @@
 
 <script>
 	export default {
-	    data() {
-	        return {
-	            messageText: ''
-	        }
-	    },
-	    methods: {
-	        sendMessage() {
-	            this.$emit('messagesent', {
-	                message: this.messageText,
-	                user: {
-	                    name: $('.navbar-right .dropdown-toggle').text()
-	                }
-	            });
-	            this.messageText = '';
-	        }
-	    }
+		data() {
+			return {
+				messageText: ''
+			}
+		},
+		methods: {
+			sendMessage() {
+				this.$emit('messagesent', {
+					message: this.messageText,
+					user   : {
+						name: window.Laravel.username
+					}
+				});
+				this.messageText = '';
+			}
+		}
 	}
 </script>
 
 <style lang="css">
 	.chat-composer {
-	    display: flex;
+		display : flex;
 	}
 	
 	.chat-composer input {
-	    flex: 1 auto;
-	    padding: .5rem 1rem;
+		flex    : 1 auto;
+		padding : .5rem 1rem;
 	}
 	
 	.chat-composer button {
-	    border-radius: 0;
+		border-radius : 0;
 	}
 </style>

@@ -7,16 +7,16 @@
 
 <script>
 	export default {
-	    props: ['message']
+		props: ['message']
 	}
 </script>
 
 <style lang="css">
 	.chat-message {
-	    padding: 1rem;
+		padding : 1rem;
 	}
 	
 	.chat-message > p {
-	    margin-bottom: .5rem;
+		margin-bottom : .5rem;
 	}
 </style>

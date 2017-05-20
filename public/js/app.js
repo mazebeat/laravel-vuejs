@@ -1114,9 +1114,9 @@ __webpack_require__(36);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-Vue.component('user-detail', __webpack_require__(50));
-Vue.component('users-list', __webpack_require__(51));
-Vue.component('chat-message', __webpack_require__(49));
+Vue.component('user-detail', __webpack_require__(49));
+Vue.component('users-list', __webpack_require__(50));
+Vue.component('chat-message', __webpack_require__(51));
 Vue.component('chat-log', __webpack_require__(48));
 Vue.component('chat-composer', __webpack_require__(47));
 
@@ -1128,19 +1128,16 @@ var app = new Vue({
 	},
 	methods: {
 		addMessage: function addMessage(message) {
-			// Add to existing messages
 			this.messages.push(message);
-
-			// Persist to the database etc
-			axios.post('/messages', message).then(function (response) {
-				// Do whatever;
+			axios.post('/chat/messages', message).then(function (response) {
+				// Check if message were save correctly;
 			});
 		}
 	},
 	created: function created() {
 		var _this = this;
 
-		axios.get('/messages').then(function (response) {
+		axios.get('/chat/messages').then(function (response) {
 			_this.messages = response.data;
 		});
 
@@ -1152,9 +1149,7 @@ var app = new Vue({
 			_this.usersInRoom = _this.usersInRoom.filter(function (u) {
 				return u != user;
 			});
-		}).listen('MessagePosted', function (e) {
-			console.log('listen', e);
-
+		}).listen('ChatMessagePosted', function (e) {
 			_this.messages.push({
 				message: e.message.message,
 				user: e.user
@@ -2025,23 +2020,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            messageText: ''
-        };
-    },
+	data: function data() {
+		return {
+			messageText: ''
+		};
+	},
 
-    methods: {
-        sendMessage: function sendMessage() {
-            this.$emit('messagesent', {
-                message: this.messageText,
-                user: {
-                    name: $('.navbar-right .dropdown-toggle').text()
-                }
-            });
-            this.messageText = '';
-        }
-    }
+	methods: {
+		sendMessage: function sendMessage() {
+			this.$emit('messagesent', {
+				message: this.messageText,
+				user: {
+					name: window.Laravel.username
+				}
+			});
+			this.messageText = '';
+		}
+	}
 });
 
 /***/ }),
@@ -2061,29 +2056,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['messages']
+	props: ['messages']
 });
 
 /***/ }),
 /* 33 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['message']
-});
-
-/***/ }),
-/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2153,7 +2130,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2245,6 +2222,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+/* 35 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['message']
+});
+
+/***/ }),
 /* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2306,7 +2301,8 @@ window.Pusher = __webpack_require__(46);
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
   broadcaster: 'pusher',
   key: window.Laravel.pusher.key,
-  cluster: window.Laravel.pusher.cluster
+  cluster: window.Laravel.pusher.cluster,
+  encrypted: true
 });
 
 /***/ }),
@@ -4697,7 +4693,7 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.chat-message {\n    padding: 1rem;\n}\n.chat-message > p {\n    margin-bottom: .5rem;\n}\n", ""]);
+exports.push([module.i, "\n.chat-message {\n\tpadding : 1rem;\n}\n.chat-message > p {\n\tmargin-bottom : .5rem;\n}\n", ""]);
 
 /***/ }),
 /* 39 */
@@ -4711,14 +4707,14 @@ exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\n\ttransitio
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.chat-log .chat-message:nth-child(even) {\n    background-color: #ccc;\n}\n.empty {\n    padding: 1rem;\n    text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n.chat-log .chat-message:nth-child(even) {\n\tbackground-color : #cccccc;\n}\n.empty {\n\tpadding    : 1rem;\n\ttext-align : center;\n}\n", ""]);
 
 /***/ }),
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.chat-composer {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n}\n.chat-composer input {\n    -webkit-box-flex: 1;\n        -ms-flex: 1 auto;\n            flex: 1 auto;\n    padding: .5rem 1rem;\n}\n.chat-composer button {\n    border-radius: 0;\n}\n", ""]);
+exports.push([module.i, "\n.chat-composer {\n\tdisplay : -webkit-box;\n\tdisplay : -ms-flexbox;\n\tdisplay : flex;\n}\n.chat-composer input {\n\t-webkit-box-flex    : 1;\n\t    -ms-flex    : 1 auto;\n\t        flex    : 1 auto;\n\tpadding : .5rem 1rem;\n}\n.chat-composer button {\n\tborder-radius : 0;\n}\n", ""]);
 
 /***/ }),
 /* 42 */
@@ -37253,47 +37249,9 @@ module.exports = Component.exports
 /* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(57)
-
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(33),
-  /* template */
-  __webpack_require__(52),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "E:\\Projects\\php\\laravel-vuejs\\resources\\assets\\js\\components\\ChatMessage.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] ChatMessage.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-34adb67c", Component.options)
-  } else {
-    hotAPI.reload("data-v-34adb67c", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(34),
   /* template */
   __webpack_require__(55),
   /* scopeId */
@@ -37322,7 +37280,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 51 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -37331,7 +37289,7 @@ __webpack_require__(58)
 
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(35),
+  __webpack_require__(34),
   /* template */
   __webpack_require__(53),
   /* scopeId */
@@ -37360,6 +37318,44 @@ module.exports = Component.exports
 
 
 /***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(57)
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(35),
+  /* template */
+  __webpack_require__(52),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "E:\\Projects\\php\\laravel-vuejs\\resources\\assets\\js\\components\\chatmessage.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] chatmessage.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0cb156bc", Component.options)
+  } else {
+    hotAPI.reload("data-v-0cb156bc", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
 /* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37372,7 +37368,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-34adb67c", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-0cb156bc", module.exports)
   }
 }
 
@@ -37678,13 +37674,13 @@ var content = __webpack_require__(38);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("2dc78c4f", content, false);
+var update = __webpack_require__(3)("dac36e62", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-34adb67c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ChatMessage.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-34adb67c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ChatMessage.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-0cb156bc\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./chatmessage.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-0cb156bc\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./chatmessage.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
