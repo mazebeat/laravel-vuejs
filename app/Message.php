@@ -18,6 +18,13 @@ class Message extends Model
 		return $this->belongsTo(User::class);
 	}
 	
+	public function routeNotificationForMail()
+	{
+		$user = User::find($this->to_user_id);
+		
+		return $user->email;
+	}
+	
 	public function routeNotificationForSlack()
 	{
 		return env('SLACK_WEBHOOK_URL');

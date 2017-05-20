@@ -3,11 +3,20 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 
-class TaskCompleted extends Notification
+/**
+ * Add cacert.pem file from https://curl.haxx.se/ca/cacert.pem in c:\xampp\php\cacert.pem
+ * Change setting in php.ini file:
+ * curl.cainfo = "C:\xampp\php\cacert.pem
+ *
+ * Class TaskCompleted
+ * @package App\Notifications
+ */
+class TaskCompleted extends Notification implements ShouldQueue
 {
 	use Queueable;
 	
@@ -31,7 +40,7 @@ class TaskCompleted extends Notification
 	 */
 	public function via($notifiable)
 	{
-		return ['slack'];
+		return ['mail', 'slack'];
 	}
 	
 	/**
@@ -57,11 +66,11 @@ class TaskCompleted extends Notification
 	public function toSlack($notifiable)
 	{
 		$task = $this->task;
-
+		
 		return (new SlackMessage)
-			->from('Laravel {laravel-vuejs}')
+			->from('Laravel')
 			->success()
-			->content("A task has been completed.</br>" . $notifiable->message);
+			->content("A task has been completed. " . $notifiable->message);
 	}
 	
 	/**
