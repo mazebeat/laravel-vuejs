@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\AdminResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -41,5 +42,17 @@ class Admin extends Authenticatable
 	public function messages()
 	{
 		return $this->hasMany(Message::class);
+	}
+	
+	/**
+	 * Customize method for Admin from current notification
+	 *
+	 * @link Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification
+	 * @param string $token
+	 * @overwrite method
+	 */
+	public function sendPasswordResetNotification($token)
+	{
+		$this->notify(new AdminResetPasswordNotification($token));
 	}
 }

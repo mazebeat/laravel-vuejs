@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AdminLoginController extends Controller
 {
@@ -13,7 +12,7 @@ class AdminLoginController extends Controller
 	
 	public function __construct()
 	{
-		$this->middleware('guest:admin');
+		$this->middleware('guest:admin')->except(['logout']);
 	}
 	
 	/**
@@ -41,10 +40,17 @@ class AdminLoginController extends Controller
 			'email'    => $request->input('email'),
 			'password' => $request->input('password')
 		];
-		if (Auth::guard('admin')->attempt($credentials, $request->input('remember'))) :
+		if (auth()->guard('admin')->attempt($credentials, $request->input('remember'))) :
 			return redirect()->intended(route('admin.dashboard'));
 		endif;
 		
 		return redirect()->back()->withInput($request->except('password'));
+	}
+	
+	public function logout()
+	{
+		auth()->guard('admin')->logout();
+		
+		return redirect('/admin');
 	}
 }

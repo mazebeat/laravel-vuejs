@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Config;
 
 class Message extends Model
 {
@@ -27,6 +28,6 @@ class Message extends Model
 	
 	public function routeNotificationForSlack()
 	{
-		return env('SLACK_WEBHOOK_URL');
+		return Config::get('service.slack.token');
 	}
 }

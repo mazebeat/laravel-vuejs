@@ -20,7 +20,11 @@ class TaskCompleted extends Notification implements ShouldQueue
 {
 	use Queueable;
 	
-	private $task;
+	protected $task;
+	protected $from;
+	protected $to;
+	protected $icon;
+	protected $image;
 	
 	/**
 	 * Create a new notification instance.
@@ -29,7 +33,11 @@ class TaskCompleted extends Notification implements ShouldQueue
 	 */
 	public function __construct($task)
 	{
-		$this->task = $task;
+		$this->from  = 'Ghost';
+		$this->to    = '@slackbot';
+		$this->icon  = ':ghost:';
+		$this->image = 'https://laravel.com/favicon.png';
+		$this->task  = $task;
 	}
 	
 	/**
@@ -40,7 +48,7 @@ class TaskCompleted extends Notification implements ShouldQueue
 	 */
 	public function via($notifiable)
 	{
-		return ['mail', 'slack'];
+		return ['slack'];
 	}
 	
 	/**
@@ -68,9 +76,10 @@ class TaskCompleted extends Notification implements ShouldQueue
 		$task = $this->task;
 		
 		return (new SlackMessage)
-			->from('Laravel')
-			->success()
-			->content("A task has been completed. " . $notifiable->message);
+			->from($this->from, $this->icon)
+			->to($this->to)
+			->image($this->image)
+			->content($notifiable->message);
 	}
 	
 	/**

@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
@@ -19,12 +18,12 @@ class RedirectIfAuthenticated
 	{
 		switch ($guard):
 			case 'admin':
-				if (Auth::guard($guard)->check()) {
+				if (auth()->guard($guard)->check()) {
 					return redirect()->route('admin.dashboard');
 				}
 				break;
 			default:
-				if (Auth::guard($guard)->check()) {
+				if (auth()->guard($guard)->check()) {
 					return redirect('/home');
 				}
 				break;

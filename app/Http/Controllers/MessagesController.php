@@ -6,7 +6,6 @@ use App\Message;
 use App\Notifications\TaskCompleted;
 use App\User;
 use Illuminate\Http\Request;
-use function auth;
 
 class MessagesController extends Controller
 {
@@ -29,9 +28,8 @@ class MessagesController extends Controller
 			'user_id'    => (int)auth()->id(),
 			'to_user_id' => (int)$request->input('to_user')
 		]);
-		
-		$task = [
-			'id'          => auth()->id(),
+		$task    = [
+			'id'          => (int)auth()->id(),
 			'title'       => 'New message incomming!',
 			'description' => $message->message,
 		];

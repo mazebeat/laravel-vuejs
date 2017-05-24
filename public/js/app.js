@@ -2087,46 +2087,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user'],
-    data: function data() {
-        return {
-            edit: false,
-            editForm: {
-                name: '',
-                email: ''
-            }
-        };
-    },
+	props: ['user'],
+	data: function data() {
+		return {
+			edit: false,
+			editForm: {
+				name: '',
+				email: ''
+			}
+		};
+	},
 
-    methods: {
-        editUser: function editUser() {
-            this.edit = true;
-            this.editForm.name = this.user.name;
-            this.editForm.email = this.user.email;
-        },
-        cancelEdit: function cancelEdit() {
-            this.edit = false;
-            this.editForm.name = '';
-            this.editForm.email = '';
-        },
-        updateUser: function updateUser(oldUser, newUser) {
-            var _this = this;
+	methods: {
+		editUser: function editUser() {
+			this.edit = true;
+			this.editForm.name = this.user.name;
+			this.editForm.email = this.user.email;
+		},
+		cancelEdit: function cancelEdit() {
+			this.edit = false;
+			this.editForm.name = '';
+			this.editForm.email = '';
+		},
+		updateUser: function updateUser(oldUser, newUser) {
+			var _this = this;
 
-            this.$http.patch('/users/' + oldUser.id, newUser).then(function (response) {
-                _this.$emit('update-user');
-                _this.cancelEdit();
-            }, function (response) {
-                _this.$parent.errors = response.data;
-            });
-        }
-    },
-    mounted: function mounted() {
-        var channel = 'newuser.' + this.user.id;
-        console.log(channel);
-        Echo.private(channel).listen('NewUser', function (event) {
-            console.log(event);
-        });
-    }
+			this.$http.patch('/users/' + oldUser.id, newUser).then(function (response) {
+				_this.$emit('update-user');
+				_this.cancelEdit();
+			}, function (response) {
+				_this.$parent.errors = response.data;
+			});
+		}
+	},
+	mounted: function mounted() {
+		var channel = 'newuser.' + this.user.id;
+		console.log(channel);
+		Echo.private(channel).listen('NewUser', function (event) {
+			console.log(event);
+		});
+	}
 });
 
 /***/ }),
@@ -2173,52 +2173,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            users: [],
-            errors: [],
-            user: {
-                id: '',
-                name: '',
-                email: ''
-            },
-            message: ''
-        };
-    },
-    created: function created() {
-        this.fetchUsers();
-    },
+	data: function data() {
+		return {
+			users: [],
+			errors: [],
+			user: {
+				id: '',
+				name: '',
+				email: ''
+			},
+			message: ''
+		};
+	},
+	created: function created() {
+		this.fetchUsers();
+	},
 
-    methods: {
-        fetchUsers: function fetchUsers() {
-            var _this = this;
+	methods: {
+		fetchUsers: function fetchUsers() {
+			var _this = this;
 
-            this.$http.get('/users').then(function (response) {
-                _this.users = response.data.users;
-            });
-        },
-        createUser: function createUser() {
-            var _this2 = this;
+			this.$http.get('/users').then(function (response) {
+				_this.users = response.data.users;
+			});
+		},
+		createUser: function createUser() {
+			var _this2 = this;
 
-            this.$http.post('/users/', this.user).then(function (response) {
-                _this2.users.push(response.data.user);
-                _this2.user = { id: '', name: '', email: '' };
-                if (_this2.errors) {
-                    _this2.errors = [];
-                }
-            }, function (response) {
-                _this2.errors = response.data;
-            });
-        },
-        deleteUser: function deleteUser(user) {
-            var _this3 = this;
+			this.$http.post('/users/', this.user).then(function (response) {
+				_this2.users.push(response.data.user);
+				_this2.user = { id: '', name: '', email: '' };
+				if (_this2.errors) {
+					_this2.errors = [];
+				}
+			}, function (response) {
+				_this2.errors = response.data;
+			});
+		},
+		deleteUser: function deleteUser(user) {
+			var _this3 = this;
 
-            this.$http.delete('/users/' + user.id).then(function (response) {
-                var index = _this3.users.indexOf(user);
-                _this3.users.splice(index, 1);
-            });
-        }
-    }
+			this.$http.delete('/users/' + user.id).then(function (response) {
+				var index = _this3.users.indexOf(user);
+				_this3.users.splice(index, 1);
+			});
+		}
+	}
 });
 
 /***/ }),
@@ -4700,7 +4700,7 @@ exports.push([module.i, "\n.chat-message {\n\tpadding : 1rem;\n}\n.chat-message 
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\n\ttransition: opacity 1s;\n}\n.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {\n\topacity: 0;\n\t-webkit-transform: translateX(20px);\n\t        transform: translateX(20px);\n}\n", ""]);
+exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\n\ttransition : opacity 1s;\n}\n.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */\n{\n\topacity   : 0;\n\t-webkit-transform : translateX(20px);\n\t        transform : translateX(20px);\n}\n", ""]);
 
 /***/ }),
 /* 40 */

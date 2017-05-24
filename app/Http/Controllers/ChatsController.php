@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ChatMessage;
 use App\Events\ChatMessagePosted;
-use Illuminate\Support\Facades\Auth;
+
 
 class ChatsController extends Controller
 {
@@ -20,17 +20,23 @@ class ChatsController extends Controller
 	
 	public function show()
 	{
-		return ChatMessage::with('user')->get();
+		$chatMessages = ChatMessage::with('user')->get();
+		
+		return response()->json([
+			'messages' => $chatMessages
+		], 200);
 	}
 	
 	public function store()
 	{
-		$user    = Auth::user();
+		$user    = auth();
 		$message = $user->chatMessages()->create([
-			'message' => request()->get('message')
+			'message' => request()->input('message')
 		]);
 		broadcast(new ChatMessagePosted($message, $user))->toOthers();
 		
-		return ['status' => 'OK'];
+		return response()->json([
+			'message' => 'Chat message stored successfully'
+		], 200);
 	}
 }

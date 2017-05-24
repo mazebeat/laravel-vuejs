@@ -18,7 +18,7 @@ class UsersController extends Controller
 		return response()->json([
 			'message' => 'Users loaded successfully',
 			'users'   => $users
-		]);
+		], 200);
 	}
 	
 	public function show($id)
@@ -30,7 +30,7 @@ class UsersController extends Controller
 		return response()->json([
 			'user'    => $user,
 			'message' => "User $id found successfully"
-		]);
+		], 200);
 	}
 	
 	public function store(Request $request)
@@ -43,14 +43,13 @@ class UsersController extends Controller
 		]);
 		
 		Log::info('Store user ' . $user->id);
-
-//		broadcast(new NewUser($user))->toOthers();
-		event(new NewUser($user));
+		
+		broadcast(new NewUser($user))->toOthers();
 		
 		return response()->json([
 			'message' => "User $user->id created successfully",
 			'user'    => $user
-		]);
+		], 200);
 	}
 	
 	public function update(Request $request, $id)
@@ -63,7 +62,7 @@ class UsersController extends Controller
 		
 		return response()->json([
 			'message' => "User $id updated successfully"
-		]);
+		], 200);
 	}
 	
 	public function destroy($id)
@@ -74,6 +73,6 @@ class UsersController extends Controller
 		
 		return response()->json([
 			'message' => "User $id destroyed successfully"
-		]);
+		], 200);
 	}
 }

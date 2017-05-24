@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "aafccd3ee77ee039b8761694250811c5",
+    "content-hash": "a5add5cd4c4ee11dfabac3e82e97586a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1085,6 +1085,55 @@
                 "storage"
             ],
             "time": "2017-04-28T10:15:08+00:00"
+        },
+        {
+            "name": "lucasvdh/laravelwhatsapp",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lucasvdh/laravelwhatsapp.git",
+                "reference": "54759b26f63c3684b7473668a9898decb11806d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lucasvdh/laravelwhatsapp/zipball/54759b26f63c3684b7473668a9898decb11806d9",
+                "reference": "54759b26f63c3684b7473668a9898decb11806d9",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*",
+                "php": ">=5.3.0",
+                "whatsapp/chat-api": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lucasvdh\\LaravelWhatsapp\\": "src/"
+                },
+                "classmap": [
+                    "src/Abstracts",
+                    "src/Interfaces"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lucas van der Have",
+                    "email": "lucasvanderhave@gmail.com",
+                    "homepage": "http://lucasvdh.codes/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel wrapper for 'whatsapp/chat-api'",
+            "homepage": "https://github.com/lucasvdh/laravelwhatsapp",
+            "keywords": [
+                "laravel",
+                "whatsapp"
+            ],
+            "time": "2016-09-07T14:57:04+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2588,6 +2637,102 @@
                 "environment"
             ],
             "time": "2016-09-01T10:05:43+00:00"
+        },
+        {
+            "name": "vluzrmos/slack-api",
+            "version": "v0.4.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vluzrmos/laravel-slack-api.git",
+                "reference": "8213d8db19be6546fac0db5256aad1cfdfac7fae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vluzrmos/laravel-slack-api/zipball/8213d8db19be6546fac0db5256aad1cfdfac7fae",
+                "reference": "8213d8db19be6546fac0db5256aad1cfdfac7fae",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~5.3|~6.0",
+                "illuminate/cache": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Vluzrmos\\": "src/Vluzrmos/"
+                },
+                "files": [
+                    "src/Vluzrmos/SlackApi/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "DBAD"
+            ],
+            "authors": [
+                {
+                    "name": "Vagner do Carmo",
+                    "email": "vluzrmos@gmail.com"
+                }
+            ],
+            "description": "Wrapper for Slack.com WEB API.",
+            "keywords": [
+                "laravel",
+                "lumen",
+                "slack"
+            ],
+            "time": "2016-10-22T16:34:17+00:00"
+        },
+        {
+            "name": "whatsapp/chat-api",
+            "version": "v3.2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mgp25/Chat-API.git",
+                "reference": "c72cad156c9d9ce7953439c089474a7a7320906d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mgp25/Chat-API/zipball/c72cad156c9d9ce7953439c089474a7a7320906d",
+                "reference": "c72cad156c9d9ce7953439c089474a7a7320906d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-gd": "*",
+                "ext-mcrypt": "*",
+                "ext-openssl": "*",
+                "ext-pdo": "*",
+                "ext-sockets": "*",
+                "ext-sqlite3": "*",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Chat API Contributing Team",
+                    "homepage": "https://github.com/mgp25/Chat-API/graphs/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "The PHP WhatsApp library",
+            "keywords": [
+                "Chat-API",
+                "whatsapi",
+                "whatsapp"
+            ],
+            "time": "2016-07-02T12:03:26+00:00"
         }
     ],
     "packages-dev": [
@@ -3305,16 +3450,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.19",
+            "version": "5.7.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1"
+                "reference": "3cb94a5f8c07a03c8b7527ed7468a2926203f58b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/69c4f49ff376af2692bad9cebd883d17ebaa98a1",
-                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3cb94a5f8c07a03c8b7527ed7468a2926203f58b",
+                "reference": "3cb94a5f8c07a03c8b7527ed7468a2926203f58b",
                 "shasum": ""
             },
             "require": {
@@ -3332,7 +3477,7 @@
                 "phpunit/php-timer": "^1.0.6",
                 "phpunit/phpunit-mock-objects": "^3.2",
                 "sebastian/comparator": "^1.2.4",
-                "sebastian/diff": "~1.2",
+                "sebastian/diff": "^1.4.3",
                 "sebastian/environment": "^1.3.4 || ^2.0",
                 "sebastian/exporter": "~2.0",
                 "sebastian/global-state": "^1.1",
@@ -3383,7 +3528,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-04-03T02:22:27+00:00"
+            "time": "2017-05-22T07:42:55+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3555,16 +3700,16 @@
         },
         {
             "name": "sebastian/diff",
-            "version": "1.4.2",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "3c7d21999e815cdfac70c6c7d79d3a9cb1bc7bc2"
+                "reference": "7f066a26a962dbe58ddea9f72a4e82874a3975a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/3c7d21999e815cdfac70c6c7d79d3a9cb1bc7bc2",
-                "reference": "3c7d21999e815cdfac70c6c7d79d3a9cb1bc7bc2",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/7f066a26a962dbe58ddea9f72a4e82874a3975a4",
+                "reference": "7f066a26a962dbe58ddea9f72a4e82874a3975a4",
                 "shasum": ""
             },
             "require": {
@@ -3603,7 +3748,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2017-05-18T13:44:30+00:00"
+            "time": "2017-05-22T07:24:03+00:00"
         },
         {
             "name": "sebastian/environment",
@@ -4065,7 +4210,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "lucasvdh/laravelwhatsapp": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

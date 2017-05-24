@@ -54,11 +54,19 @@
 
 							<ul class="dropdown-menu" role="menu">
 								<li>
-									<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+									@if(auth()->guard('admin')->check())
+										<a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout Admin</a>
 
-									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-										{{ csrf_field() }}
-									</form>
+										<form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+											{{ csrf_field() }}
+										</form>
+									@elseif(auth()->guard('web')->check())
+										<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout User</a>
+
+										<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+											{{ csrf_field() }}
+										</form>
+									@endif
 								</li>
 							</ul>
 						</li>
@@ -84,7 +92,9 @@
 			key    : '{{ env('PUSHER_APP_KEY') }}',
 			cluster: '{{ env('PUSHER_APP_CLUSTER') }}'
 		},
-		username : '{{ Auth::user()->name }}'
+		@if(auth()->check())
+		username : '{{ auth()->user()->name }}'
+		@endif
 	};
 </script>
 <script src="{{ asset('js/app.js') }}"></script>
